@@ -1,0 +1,177 @@
+
+============================================================
+Test: WGLS No Ring Setting
+Key Plug R1  R2  R3 Refl R3  R2  R1 Plug
+[W] ->W ->Q ->D ->R ->B ->B ->C ->X ->N ->N 
+
+Details:
+--------
+[Keyboard Press W]
+=> W
+[PlugBoard: 'EO FP LY'] No Plug Used
+=> W
+[rotor  I = EKMFLGDQVZNTOWYHXUSPAIBRCJ 0 ring_setting = 1 rotation = 1] in letter W - remove offset(-1) X  rotor enc R  adding offset(-1) Q
+=> Q
+[rotor VI = JPGVOUMFYQBENHZRDKASXLICTW 1 ring_setting = 1 rotation = 0] in letter Q - remove offset(0) Q  rotor enc D  adding offset(0) D
+=> D
+[rotor  V = VZBRGITYUPSDNHLXAWMJQOFECK 2 ring_setting = 1 rotation = 0] in letter D - remove offset(0) D  rotor enc R  adding offset(0) R
+=> R
+[Reflector: YRUHQSLDPXNGOKMIEBFZCWVJAT] in letter R - out letter B
+=> B
+[Rotor Factory - Set Reverse Route] => B
+[rotor  V = VZBRGITYUPSDNHLXAWMJQOFECK 2 ring_setting = 1 rotation = 0] in letter B - remove offset(0) B  rotor enc C  adding offset(0) C
+=> C
+[rotor VI = JPGVOUMFYQBENHZRDKASXLICTW 1 ring_setting = 1 rotation = 0] in letter C - remove offset(0) C  rotor enc X  adding offset(0) X
+=> X
+[rotor  I = EKMFLGDQVZNTOWYHXUSPAIBRCJ 0 ring_setting = 1 rotation = 1] in letter X - remove offset(-1) Y  rotor enc O  adding offset(-1) N
+=> N
+[PlugBoard: 'EO FP LY'] No Plug Used
+=> N
+------------------------------------------------------------
+                  Ring
+                 Setting
+Left   Rotor: V    +0 (A)      This is a default ring setting
+Middle Rotor: VI   +0 (A)      of 0 for each rotor. Ring Setting
+Right  Rotor: I    +0 (A)      has no effect. Standard Behaviour.
+Reflector: B
+Plug Board: EO FP LY
+
+Keyboard Press 'W'
+Lights UP 'N'
+                         [N]      [W]  
+                          ^        V   
+PlugBoard:   ABCDEFGHIJKLMNOPQRSTUVWXYZ
+             ABCDOPGHIJKYMNEFQRSTUVWXLZ
+                          ^        V   
+             --------------------------
+                          ^        V   
+             abcdefghijklmnopqrstuvwxyz  
+Ring +0      BCDEFGHIJKLMNOPQRSTUVWXYZA  <- ring setting - position = -1 offset
+                          ^        V   
+             BCDEFGHIJKLMNOPQRSTUVWXYZA 
+Rotor I:     KMFLGDQVZNTOWYHXUSPAIBRCJE 
+                          ^        V   
+                             V      ^ 
+Ring +0      BCDEFGHIJKLMNOPQRSTUVWXYZA  <- ring setting - position = -1 offset
+             abcdefghijklmnopqrstuvwxyz
+                             V      ^  
+             --------------------------
+                             V      ^  
+             abcdefghijklmnopqrstuvwxyz
+Ring +0      ABCDEFGHIJKLMNOPQRSTUVWXYZ
+                             V      ^  
+             ABCDEFGHIJKLMNOPQRSTUVWXYZ
+Rotor VI:    JPGVOUMFYQBENHZRDKASXLICTW
+                             V      ^  
+               ^V                      
+Ring +0      ABCDEFGHIJKLMNOPQRSTUVWXYZ
+             abcdefghijklmnopqrstuvwxyz
+               ^V                      
+             --------------------------
+               ^V                      
+             abcdefghijklmnopqrstuvwxyz
+Ring +0      ABCDEFGHIJKLMNOPQRSTUVWXYZ
+               ^V                      
+             ABCDEFGHIJKLMNOPQRSTUVWXYZ
+Rotor V:     VZBRGITYUPSDNHLXAWMJQOFECK
+               ^V                      
+              ^               V        
+Ring +0      ABCDEFGHIJKLMNOPQRSTUVWXYZ
+             abcdefghijklmnopqrstuvwxyz
+              ^               V        
+             --------------------------
+              ^               V        
+             ABCDEFGHIJKLMNOPQRSTUVWXYZ
+Reflector B: YRUHQSLDPXNGOKMIEBFZCWVJAT
+
+
+============================================================
+Test: WGLS GGP Ring Setting
+Key Plug R1  R2  R3 Refl R3  R2  R1 Plug
+[W] ->W ->J ->B ->U ->C ->C ->X ->V ->D ->D 
+
+Details:
+--------
+[Keyboard Press W]
+=> W
+[PlugBoard: 'EO FP LY'] No Plug Used
+=> W
+[rotor  I = EKMFLGDQVZNTOWYHXUSPAIBRCJ 0 ring_setting = 16 rotation = 1] in letter W - remove offset(14) I  rotor enc V  adding offset(14) J
+=> J
+[rotor VI = JPGVOUMFYQBENHZRDKASXLICTW 1 ring_setting = 7 rotation = 0] in letter J - remove offset(6) D  rotor enc V  adding offset(6) B
+=> B
+[rotor  V = VZBRGITYUPSDNHLXAWMJQOFECK 2 ring_setting = 7 rotation = 0] in letter B - remove offset(6) V  rotor enc O  adding offset(6) U
+=> U
+[Reflector: YRUHQSLDPXNGOKMIEBFZCWVJAT] in letter U - out letter C
+=> C
+[Rotor Factory - Set Reverse Route] => C
+[rotor  V = VZBRGITYUPSDNHLXAWMJQOFECK 2 ring_setting = 7 rotation = 0] in letter C - remove offset(6) W  rotor enc R  adding offset(6) X
+=> X
+[rotor VI = JPGVOUMFYQBENHZRDKASXLICTW 1 ring_setting = 7 rotation = 0] in letter X - remove offset(6) R  rotor enc P  adding offset(6) V
+=> V
+[rotor  I = EKMFLGDQVZNTOWYHXUSPAIBRCJ 0 ring_setting = 16 rotation = 1] in letter V - remove offset(14) H  rotor enc P  adding offset(14) D
+=> D
+[PlugBoard: 'EO FP LY'] No Plug Used
+=> D
+
+------------------------------------------------------------
+                   Ring
+                  Setting
+Left   Rotor: V    +6 (G)      Now with a positive ring
+Middle Rotor: VI   +6 (G)      setting we add more complexity
+Right  Rotor: I   +15 (P)
+Reflector: B
+Plug Board: EO FP LY
+
+Keyboard Press 'W'
+Lights UP 'D'
+               [D]                [W]  
+                ^                  V   
+PlugBoard:   ABCDEFGHIJKLMNOPQRSTUVWXYZ
+             ABCDOPGHIJKYMNEFQRSTUVWXLZ
+                ^                  V   
+             --------------------------  interface between plugboard and rotor
+                ^                  V                             
+             abcdefghijklmnopqrstuvwxyz  
+Ring +15     MNOPQRSTUVWXYZABCDEFGHIJKL  <- ring setting - position = +14 offset
+                ^                  V        
+                     V      ^          
+             ABCDEFGHIJKLMNOPQRSTUVWXYZ  
+Rotor I:     EKMFLGDQVZNTOWYHXUSPAIBRCJ
+                     V      ^        
+                      V           ^   
+Ring +15     MNOPQRSTUVWXYZABCDEFGHIJKL  <- ring setting - position = +14 offset
+             abcdefghijklmnopqrstuvwxyz
+                      V           ^   
+             --------------------------  interface between rotors
+                      V           ^     
+             abcdefghijklmnopqrstuvwxyz
+Ring +6      UVWXYZABCDEFGHIJKLMNOPQRST
+                      V           ^    
+                V           ^          
+             ABCDEFGHIJKLMNOPQRSTUVWXYZ
+Rotor VI:    JPGVOUMFYQBENHZRDKASXLICTW
+                V           ^          
+              V                     ^  
+Ring +6      UVWXYZABCDEFGHIJKLMNOPQRST
+             abcdefghijklmnopqrstuvwxyz
+              V                     ^  
+             --------------------------  interface between rotors
+              v                     ^  
+             abcdefghijklmnopqrstuvwxyz
+Ring +6      UVWXYZABCDEFGHIJKLMNOPQRST
+              V                     ^  
+                              ^   V    
+             ABCDEFGHIJKLMNOPQRSTUVWXYZ
+Rotor V:     VZBRGITYUPSDNHLXAWMJQOFECK
+                              ^   V    
+               ^                 V     
+Ring +6      UVWXYZABCDEFGHIJKLMNOPQRST
+             abcdefghijklmnopqrstuvwxyz
+               ^                 V     
+             --------------------------  interface between rotor and reflector
+               ^                 V     
+             ABCDEFGHIJKLMNOPQRSTUVWXYZ
+Reflector B: YRUHQSLDPXNGOKMIEBFZCWVJAT
+             --------------------------
+

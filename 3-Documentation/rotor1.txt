@@ -1,0 +1,43 @@
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+W X Y Z A B C D E F G H I J K L M N O P Q R S T U V - Ring I - 
+L M N O P Q R S T U V W X Y Z A B C D E F G H I J K - input - -
+
+T U V W X Y Z A B C D E F G H I J K L M N O P Q R S - encryption in -
+P A I B R C J E K M F L G D Q V Z N T O W Y H X U S - encryption out -
+
+L M N O P Q R S T U V W X Y Z A B C D E F G H I J K - (P-16) - -
+W X Y Z A B C D E F G H I J K L M N O P Q R S T U V - ring - -
+
+L M N O P Q R S T U V W X Y Z A B C D E F G H I J K - - - -
+W X Y Z A B C D E F G H I J K L M N O P Q R S T U V - output - -
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+W X Y Z A B C D E F G H I J K L M N O P Q R S T U V - Ring V -
+C D E F G H I J K L M N O P Q R S T U V W X Y Z A B - input -
+
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z - encryption in -
+V Z B R G I T Y U P S D N H L X A W M J Q O F E C K - encryption out -
+
+C D E F G H I J K L M N O P Q R S T U V W X Y Z A B - (G-7) - -
+W X Y Z A B C D E F G H I J K L M N O P Q R S T U V - ring - -
+
+C D E F G H I J K L M N O P Q R S T U V W X Y Z A B - - - -
+W X Y Z A B C D E F G H I J K L M N O P Q R S T U V - output - -
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+W X Y Z A B C D E F G H I J K L M N O P Q R S T U V - Ring VI -
+C D E F G H I J K L M N O P Q R S T U V W X Y Z A B - input - -
+
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z - encryption in -
+J P G V O U M F Y Q B E N H Z R D K A S X L I C T W - encryption out -
+
+C D E F G H I J K L M N O P Q R S T U V W X Y Z A B - (G-7) - -
+W X Y Z A B C D E F G H I J K L M N O P Q R S T U V - ring - -
+
+C D E F G H I J K L M N O P Q R S T U V W X Y Z A B - - - - 
+W X Y Z A B C D E F G H I J K L M N O P Q R S T U V - output - -
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z - Reflector B -
+Y R U H Q S L D P X N G O K M I E B F Z C W V J A T - - - -
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z - Plug Board -
+A B C D O P G H I J K Y M N E F Q R S T U V W X L Z - - - -

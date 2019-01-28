@@ -1,0 +1,60 @@
+A A - Y A - W C  W C  J A  C W - W C  W C  V A  C W - W L  W L  P T  L W -  
+
+B B - R B - X D  X D  P B  D X - X D  X D  Z B  D X - X M  X M  A U  M X -  
+
+C C - U C - Y E  Y E  G C  E Y - Y E  Y E  B C  E Y - Y N  Y N  I V  N Y -  
+
+D D - H D - Z F  Z F  V D  F Z - Z F  Z F  R D  F Z - Z O  Z O  B W  O Z -  
+
+O E - Q E - A G  A G  O E  G A - A G  A G  G E  G A - A P  A P  R X  P A -  
+
+P F - S F - B H  B H  U F  H B - B H  B H  I F  H B - B Q  B Q  C Y  Q B -  
+
+G G - L G - C I  C I  M G  I C - C I  C I  T G  I C - C R  C R  J Z  R C -  
+
+H H - D H - D J  D J  F H  J D - D J  D J  Y H  J D - D S  D S  E A  S D -  
+
+I I - P I - E K  E K  Y I  K E - E K  E K  U I  K E - E T  E T  K B  T E -  
+
+J J - X J - F L  F L  Q J  L F - F L  F L  P J  L F - F U  F U  M C  U F -  
+
+K K - N K - G M  G M  B K  M G - G M  G M  S K  M G - G V  G V  F D  V G -  
+
+Y L - G L - H N  H N  E L  N H - H N  H N  D L  N H - H W  H W  L E  W H -  
+
+M M - O M - I O  I O  N M  O I - I O  I O  N M  O I - I X  I X  G F  X I -  
+
+N N - K N - J P  J P  H N  P J - J P  J P  H N  P J - J Y  J Y  D G  Y J -  
+
+E O - M O - K Q  K Q  Z O  Q K - K Q  K Q  L O  Q K - K Z  K Z  Q H  Z K -  
+
+F P - I P - L R  L R  R P  R L - L R  L R  X P  R L - L A  L A  V I  A L -  
+
+Q Q - E Q - M S  M S  D Q  S M - M S  M S  A Q  S M - M B  M B  Z J  B M -  
+
+R R - B R - N T  N T  K R  T N - N T  N T  W R  T N - N C  N C  N K  C N -  
+
+S S - F S - O U  O U  A S  U O - O U  O U  M S  U O - O D  O D  T L  D O -  
+
+T T - Z T - P V  P V  S T  V P - P V  P V  J T  V P - P E  P E  O M  E P -  
+
+U U - C U - Q W  Q W  X U  W Q - Q W  Q W  Q U  W Q - Q F  Q F  W N  F Q -  
+
+V V - W V - R X  R X  L V  X R - R X  R X  O V  X R - R G  R G  Y O  G R -  
+
+W W - V W - S Y  S Y  I W  Y S - S Y  S Y  F W  Y S - S H  S H  H P  H S -  
+
+X X - J X - T Z  T Z  C X  Z T - T Z  T Z  E X  Z T - T I  T I  X Q  I T -  
+
+L Y - A Y - U A  U A  T Y  A U - U A  U A  C Y  A U - U J  U J  U R  J U -  
+
+Z Z - T Z - V B  V B  W Z  B V - V B  V B  K Z  B V - V K  V K  S S  K V -  
+
+- - - - - - - -  - -  - -  - - - - -  - -  - -  - - - - -  - -  - -  - - -  
+
+- Plug - - Reflector - output -  ring (G-7)  encryption encryption  input Ring - output -  ring (G-7)  encryption encryption  input Ring - output -  ring (P-16)  encryption encryption  input Ring -  
+
+- Board - - B - - -  - -  out in  - VI - - -  - -  out in  - V - - -  - -  out in  - I -  
+
+- - - - - - - -  - -  - -  - - - - -  - -  - -   - - - -  - -  - -  - - -  
+
