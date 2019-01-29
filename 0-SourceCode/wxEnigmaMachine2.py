@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 
 """
 wxEnigmaMachine
@@ -43,10 +43,10 @@ class SpinCtrlAlpha( wx.SpinCtrl ):
     def onKey(self, evt):
         if evt.GetKeyCode() == wx.WXK_DOWN:
             self.SetValue((self.GetValue()+1)%(self.GetMax()+1))
-            self.SetValueString(self.letters[self.GetValue()])
+            self.SetValue(self.letters[self.GetValue()])
         elif evt.GetKeyCode() == wx.WXK_UP:
             self.SetValue((self.GetValue()-1)%(self.GetMax()+1))
-            self.SetValueString(self.letters[self.GetValue()])
+            self.SetValue(self.letters[self.GetValue()])
         else:
             evt.Skip()
         
@@ -55,7 +55,7 @@ class SpinCtrlAlpha( wx.SpinCtrl ):
         
     def OnSpin(self, evt):
         #print self.letters[self.GetValue()]
-        self.SetValueString( self.letters[self.GetValue()] )
+        self.SetValue( self.letters[self.GetValue()] )
 
     def GetStringValue(self):
         return self.letters[self.GetValue()]
@@ -84,7 +84,7 @@ class EnigmaPanel(wx.Panel):
         #    self.ringSetting[p].setLetters(ALPHA)
         self.combo = wx.ComboBox(self, wx.ID_ANY, value="", 
            pos=(250,0), #size=DefaultSize, 
-           choices=Machines.keys(), style=0, 
+           choices=list(Machines.keys()), style=0, 
            #validator=DefaultValidator,
            #name=ComboBoxNameStr
            )
@@ -95,6 +95,9 @@ class EnigmaPanel(wx.Panel):
         self.rotorL.setLetters(self.machine['Rotors'])
         self.rotorM.setLetters(self.machine['Rotors'])
         self.rotorR.setLetters(self.machine['Rotors'])
+        self.rotorL.SetValue(self.machine['Rotors'][0])
+        self.rotorM.SetValue(self.machine['Rotors'][0])
+        self.rotorR.SetValue(self.machine['Rotors'][0])
         
         self.rotorPosL=createSpinCtrlAlpha(self, wx.ID_ANY, ALPHA[0], smax=25)
         self.rotorPosM=createSpinCtrlAlpha(self, wx.ID_ANY, ALPHA[0], smax=25)
@@ -102,6 +105,9 @@ class EnigmaPanel(wx.Panel):
         self.rotorPosL.setLetters(ALPHA)
         self.rotorPosM.setLetters(ALPHA)
         self.rotorPosR.setLetters(ALPHA)
+        self.rotorPosL.SetValue(ALPHA[0])
+        self.rotorPosM.SetValue(ALPHA[0])
+        self.rotorPosR.SetValue(ALPHA[0])
         
         self.ringSettingL=createSpinCtrlAlpha(self, wx.ID_ANY, ALPHA[0], smax=25)
         self.ringSettingM=createSpinCtrlAlpha(self, wx.ID_ANY, ALPHA[0], smax=25)
@@ -109,12 +115,16 @@ class EnigmaPanel(wx.Panel):
         self.ringSettingL.setLetters(ALPHA)
         self.ringSettingM.setLetters(ALPHA)
         self.ringSettingR.setLetters(ALPHA)
+        self.ringSettingL.SetValue(ALPHA[0])
+        self.ringSettingM.SetValue(ALPHA[0])
+        self.ringSettingR.SetValue(ALPHA[0])
         
         self.reflector = createSpinCtrlAlpha(self, wx.ID_ANY, self.machine['Reflectors'][0], smax=1, ssize=90)
         self.reflector.setLetters(self.machine['Reflectors'])
+        self.reflector.SetValue(self.machine['Reflectors'][0])
         
         tc_h, tc_font = self._getFont()
-        lbl_h, lbl_font = self._getFont(size=11, name=u'Helvetica')
+        lbl_h, lbl_font = self._getFont(size=11, name='Helvetica')
         
         self.blank85_lbl = wx.StaticText(self, -1, '', size=(85,-1))
         self.Rotorhdr_lbl = wx.StaticText(self, -1, 'Left', size=(45,-1))
@@ -230,7 +240,7 @@ class EnigmaPanel(wx.Panel):
         
         return layoutBox
         
-    def _getFont(self, size=11, name=u'Consolas'):
+    def _getFont(self, size=11, name='Consolas'):
         font = wx.Font(size, wx.MODERN, wx.NORMAL, wx.NORMAL, False, name)
         dc = wx.ScreenDC()
         dc.SetFont(font)
@@ -267,9 +277,9 @@ class EnigmaPanel(wx.Panel):
         plug.SetInsertionPointEnd()
         
     def onKeyPress (self, evt):
-        if self.enigma == None:
-            self.createEnigmaMachine()
         Line = self.input.GetValue().upper()
+        if self.enigma == None or len(Line) == 0:
+            self.createEnigmaMachine()
         if len(Line) > 0:
             kc = Line[-1]
             if kc in ALPHA or kc == ' ':
@@ -277,9 +287,9 @@ class EnigmaPanel(wx.Panel):
                 self.output.ChangeValue(self.formatLine(self.enigma.encrypt_message(Line)))
                 self.input.ChangeValue(self.formatLine(Line))
                 letters = self.enigma.get_rotor_positions()
-                self.rotorPosL.SetValueString(letters[Left])
-                self.rotorPosM.SetValueString(letters[Middle])
-                self.rotorPosR.SetValueString(letters[Right])
+                self.rotorPosL.SetValue(letters[Left])
+                self.rotorPosM.SetValue(letters[Middle])
+                self.rotorPosR.SetValue(letters[Right])
             else:
                 self.input.ChangeValue(self.formatLine(Line[:-1]))
             self.inputLabelp2.SetLabel("(%d chars)" % len(Line.replace(' ','')))
@@ -290,9 +300,9 @@ class EnigmaPanel(wx.Panel):
             self.input.ChangeValue("")
             self.createEnigmaMachine()
             letters = self.enigma.get_rotor_positions()
-            self.rotorPosL.SetValueString(letters[Left])
-            self.rotorPosM.SetValueString(letters[Middle])
-            self.rotorPosR.SetValueString(letters[Right])
+            self.rotorPosL.SetValue(letters[Left])
+            self.rotorPosM.SetValue(letters[Middle])
+            self.rotorPosR.SetValue(letters[Right])
         self.inputLabelp2.SetLabel("(%d chars)" % len(Line.replace(' ','')))
         self.inputLabelBox.Layout()
             
@@ -340,13 +350,13 @@ class MacFrame(wx.Frame):
 
         FileMenu = wx.Menu()
         
-        item = FileMenu.Append(wx.ID_EXIT, text = "&Exit")
+        item = FileMenu.Append(wx.ID_EXIT, "&Exit")
         self.Bind(wx.EVT_MENU, self.OnQuit, item)
 
-        item = FileMenu.Append(wx.ID_ANY, text = "&Open")
+        item = FileMenu.Append(wx.ID_ANY, "&Open")
         self.Bind(wx.EVT_MENU, self.OnOpen, item)
 
-        item = FileMenu.Append(wx.ID_PREFERENCES, text = "&Preferences")
+        item = FileMenu.Append(wx.ID_PREFERENCES, "&Preferences")
         self.Bind(wx.EVT_MENU, self.OnPrefs, item)
 
         MenuBar.Append(FileMenu, "&File")
@@ -445,9 +455,9 @@ class MacApp(wx.App):
 
     def MacOpenFile(self, filename):
         """Called for files droped on dock icon, or opened via finders context menu"""
-        print filename
-        print "%s dropped on app"%(filename) #code to load filename goes here.
-        self.OpenFileMessage(filename)
+        #print(filename)
+        #print("%s dropped on app"%(filename)) #code to load filename goes here.
+        #self.OpenFileMessage(filename)
         
     def MacReopenApp(self):
         """Called when the doc icon is clicked, and ???"""

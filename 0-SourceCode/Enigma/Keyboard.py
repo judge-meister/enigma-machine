@@ -104,8 +104,8 @@ class KeyboardGear(object):
 class TestKeyboard(unittest.TestCase):
     
     def createMachine(self):
-        from Rotors import RotorFactory
-        from MachineDetails import Machines
+        from .Rotors import RotorFactory
+        from .MachineDetails import Machines
         RF=RotorFactory(Machines['M3'])
         RF.createRotor(Left,   "I A A")   # notch Q (17)
         RF.createRotor(Middle, "II A A")  # notch E (5)
@@ -212,8 +212,8 @@ class TestKeyboard(unittest.TestCase):
 
     def create_G312_Machine(self):
         """"""
-        from Rotors import RotorFactory
-        from MachineDetails import Machines
+        from .Rotors import RotorFactory
+        from .MachineDetails import Machines
         #print "Create G312 Machine\n"
         machine = Machines['G312']
         #print "Left  ", machine['III']['turnover']
@@ -229,7 +229,7 @@ class TestKeyboard(unittest.TestCase):
 
 
     def test_G312_rotors(self):
-        from AlphaUtils import alpha
+        from .AlphaUtils import alpha
         KB = self.create_G312_Machine()
         #RIGHT  -  A B C   E F G   I   K L     O P Q   S   U V W     Z
         #MIDDLE -  A   C D   F G H     K   M N     Q   S T   V     Y Z

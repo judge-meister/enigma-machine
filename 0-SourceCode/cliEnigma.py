@@ -1,9 +1,9 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 
 import sys
 from enigma import runTests
 from Enigma.Rotors import RotorFactory, RotorPos, Left, Middle, Right
-from Enigma.Reflectors import Reflector
+from Enigma.Reflectors import ReflectorFixed as Reflector
 from Enigma.PlugBoard import PlugBoard
 from Enigma.MachineDetails import Machines
 from Enigma.EnigmaMachine import EnigmaMachine
@@ -21,18 +21,18 @@ def askUser():
     stop = False
     macine = None
     while False == stop:
-        rinput = raw_input("Please Choose an Enigma Machine %s : " % Machines.keys())
-        if rinput in Machines.keys():
+        rinput = input("Please Choose an Enigma Machine %s : " % list(Machines.keys()))
+        if rinput in list(Machines.keys()):
             stop = True
             machine = rinput
-    print machine
+    print(machine)
     RFactory = RotorFactory(Machines[machine])
     
     def createRotor(loc,default):
         stop = False
         while False == stop:
             try:
-                rinput = raw_input("Enter the %s Rotor details: ID Ring Rotor [%s] : " % (RotorPos[loc], default))
+                rinput = input("Enter the %s Rotor details: ID Ring Rotor [%s] : " % (RotorPos[loc], default))
                 if len(rinput) == 0:
                     rinput = default;
                 if len(rinput.split(' ')) == 3:
@@ -41,7 +41,7 @@ def askUser():
                 else:
                     raise InvalidRotorError
             except InvalidRotorError as e:
-                print("Rotor details were invalid. Please try again.", e.value)
+                print(("Rotor details were invalid. Please try again.", e.value))
                 
     for loc, default in ((Left,'I A A'),(Middle,'II A A'),(Right,'III A A')):
         createRotor(loc, default)
@@ -52,22 +52,22 @@ def askUser():
         if str in Machines[machine]['Reflectors']:
             return Reflector(Machines[machine], str)
         else:
-            print str,"not a reflector"
-    reflector = createReflector('UKW-B', raw_input("Choose a reflector [UKW-B] : "))
+            print(str,"not a reflector")
+    reflector = createReflector('UKW-B', input("Choose a reflector [UKW-B] : "))
     
     def createPlugBoard(PB):
         stop = False
         count = 1
         while False == stop:
             try:
-                plug = raw_input("Add a Plug to the Plug Board (empty plug to end) [%s] : " % PB)
+                plug = input("Add a Plug to the Plug Board (empty plug to end) [%s] : " % PB)
                 if len(plug) == 2 and count < 10:
                     PB += Plug(plug)
                     count += 1
                 else:
                     stop = True
             except (InvalidPlugError) as e:
-                print("Invalid Plug Error",e.value)
+                print(("Invalid Plug Error",e.value))
         return PB
     if Machines[machine]['Plugboard']:
         PB = createPlugBoard(PlugBoard())
@@ -79,13 +79,13 @@ def askUser():
 def codeMessage(Enigma):
     stop = False
     while False == stop:
-        clue = raw_input("\nEnter Message to Encode/Decode :")
+        clue = input("\nEnter Message to Encode/Decode :")
         if clue == "":
             stop = True
         else:
             Enigma.reset()
             answer = Enigma.encrypt_message(clue.upper())
-            print("Answer: %s" % answer)
+            print(("Answer: %s" % answer))
         
 def usage():
     print("\nenigma [-h] [-t] [-i]\n")
@@ -108,7 +108,7 @@ def getOptions():
         opts, args = getopt.getopt(sys.argv[1:], "hit", ["help", "test", "interactive"])
     except getopt.GetoptError as err:
         # print help information and exit:
-        print(str(err)) # will print something like "option -a not recognized"
+        print((str(err))) # will print something like "option -a not recognized"
         usage()
         sys.exit(2)
         

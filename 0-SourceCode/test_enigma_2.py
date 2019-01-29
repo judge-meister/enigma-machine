@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 
@@ -16,7 +16,7 @@ from Enigma.MachineDetails import Machines
 
 
 def spaceResult(result, groupSize=5):
-    return ' '.join(result[i:i+groupSize] for i in xrange(0, len(result), groupSize))
+    return ' '.join(result[i:i+groupSize] for i in range(0, len(result), groupSize))
 
 
 class TestEnigma2(unittest.TestCase):

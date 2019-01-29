@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 """
@@ -11,7 +11,7 @@ Enigma Tests
 from Enigma.PlugBoard import createPlugBoard
 from Enigma.Rotors import RotorFactory
 from Enigma.Rotors import Left, Middle, Right
-from Enigma.Reflectors import *
+from Enigma.Reflectors import ReflectorFixed as Reflector
 from Enigma.MachineDetails import Machines
 from Enigma.EnigmaMachine import EnigmaMachine
 
