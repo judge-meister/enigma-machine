@@ -2,42 +2,52 @@
 
 
 import unittest
-from enigma import *
+import sys
+sys.path.insert(0, '../0-SourceCode')
+#from Enigma import *
+from Enigma.Exceptions import PlugBoardFullError, InvalidPlugError, InvalidRotorError
+from Enigma.Keyboard import Keyboard
+from Enigma.Rotors import RotorWheel, RotorFactory
+from Enigma.Rotors import Left, Middle, Right, Greek
+from Enigma.Reflectors import ReflectorFixed as Reflectors
+from Enigma.PlugBoard import PlugBoard, Plug, createPlugBoard
+from Enigma.EnigmaMachine import EnigmaMachine
+from Enigma.MachineDetails import Machines
 
 class EnigmaTest(unittest.TestCase):
 
     def testRotorI_P_A_W(self):
-        RW = RotorWheel('I',"Right",'P','A') # 16,0
+        RW = RotorWheel(Machines['M3'],'I',"Right",'P','A') # 16,0
         RW.rotate()
         #print "Rotor I - for - W should become J",RW.encrypt("W",'F')
         self.assertEqual("J",RW("W"))#,'F'))
         
     def testRotorI_P_A_V(self):
-        RW = RotorWheel('I',"Right",'P','A') # 16,0
+        RW = RotorWheel(Machines['M3'],'I',"Right",'P','A') # 16,0
         RW.rotate()
         RW.setForward(False)
         #print "Rotor I - rev - V should become D",RW.encrypt("V",'R'),"\n"
         self.assertEqual("D",RW("V"))#,'R'))
     
     def testRotorVI_G_A_J(self):
-        RW = RotorWheel('VI',"Middle",'G','A') # 7,0
+        RW = RotorWheel(Machines['M3'],'VI',"Middle",'G','A') # 7,0
         #print "Rotor VI - for - J should become B",RW.encrypt("J",'F')
         self.assertEqual("B",RW("J"))#,'F'))
         
     def testRotorVI_G_A_X(self):
-        RW = RotorWheel('VI',"Middle",'G','A') # 7,0
+        RW = RotorWheel(Machines['M3'],'VI',"Middle",'G','A') # 7,0
         #print "Rotor VI - rev - X should become V",RW.encrypt("X",'R'),"\n"
         RW.setForward(False)
         self.assertEqual("V",RW("X"))#,'R'))
     
     def testRotorV_G_A_V(self):
-        RW = RotorWheel('V',"Left",'G','A') # 7,0
+        RW = RotorWheel(Machines['M3'],'V',"Left",'G','A') # 7,0
         #RW.printSettings()
         #print "Rotor V - for - B should become U",RW.encrypt("B",'F')
         self.assertEqual("U",RW("B"))#,'F'))
         
     def testRotorV_G_A_C(self):
-        RW = RotorWheel('V',"Left",'G','A') # 7,0
+        RW = RotorWheel(Machines['M3'],'V',"Left",'G','A') # 7,0
         RW.setForward(False)
         #RW.printSettings()
         #print "Rotor V - rev - C should become X",RW.encrypt("C",'R'),"\n"
@@ -46,7 +56,7 @@ class EnigmaTest(unittest.TestCase):
 
     def testRotorRotation(self):
         #print "Testing Rotor Rotation roll-over"
-        RW = RotorWheel('I','Right','A','A')
+        RW = RotorWheel(Machines['M3'],'I','Right','A','A')
         for x in range(0,26):
             #print(RW.rotation,RW.offset)
             self.assertEqual(RW.rotation,x)
@@ -59,12 +69,12 @@ class EnigmaTest(unittest.TestCase):
             RW.rotate()
     
     def testRotorWheel_Print(self):
-        RW = RotorWheel('I','Right','A','A')
+        RW = RotorWheel(Machines['M3'],'I','Right','A','A')
         ret = "%s" % RW
-        self.assertEqual(ret,"rotor I = EKMFLGDQVZNTOWYHXUSPAIBRCJ 'Right' ring_setting = 1 rotation = 0")
+        self.assertEqual(ret,"rotor  I = EKMFLGDQVZNTOWYHXUSPAIBRCJ 'Right' ring_setting = 1 rotation = 0")
         
     def testRotorWheel_Reset(self):
-        RW = RotorWheel('I','Right','A','A')
+        RW = RotorWheel(Machines['M3'],'I','Right','A','A')
         RW.rotate()
         self.assertEqual(RW.rotation,1)
         self.assertEqual(RW.offset,-1)
@@ -72,9 +82,9 @@ class EnigmaTest(unittest.TestCase):
         self.assertEqual(RW.rotation,0)
         self.assertEqual(RW.offset,0)
         
-    def testKeyboard(self):
+    def DISABLED_testKeyboard(self):
         #print "Testing Keyboard"
-        RF=RotorFactory()
+        RF=RotorFactory(Machines['M3'])
         RF.createRotor(Left,   "I A A")
         RF.createRotor(Middle, "II A A")
         RF.createRotor(Right,  "III A A")
@@ -154,7 +164,7 @@ class EnigmaTest(unittest.TestCase):
         PB=PlugBoard()
         PB = createPlugBoard(['AB', 'IJ'])
         ret = "%s" % PB
-        self.assertEqual(ret,"'AB IJ'")
+        self.assertEqual(ret,"PlugBoard: 'AB IJ'")
         #self.assertEqual(ret,"Board=['B', 'A', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'I', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']\nPlugs=['A', 'B', 'I', 'J']")
         
     def testPlugBoard_encrypt(self):
@@ -168,11 +178,11 @@ class EnigmaTest(unittest.TestCase):
     def testEnigmaMachine_Encrypt(self):
         #print "\n-- Enigma Test 4 --"
         # Rotor 5 6 1 , Rings G G P, reflector B, plugs E-O F-P L-Y 
-        RF=RotorFactory()
+        RF=RotorFactory(Machines['M3'])
         RF.createRotor(Left,   "V G A")
         RF.createRotor(Middle, "VI G A")
         RF.createRotor(Right,  "I P A")
-        Enigma = EnigmaMachine ( RF, Reflectors['B'],
+        Enigma = EnigmaMachine (Machines['M3'], RF, Reflectors(Machines['M3'], 'UKW-B'),
                                  createPlugBoard(['EO','FP','LY']) )
         clue="WGLS CWYJ NLAY YMPW KSPP IKBK QDUA JVKO BLSS HIBO MHWO"
         #print clue
@@ -182,11 +192,11 @@ class EnigmaTest(unittest.TestCase):
     def testEnigmaMachine_Reset(self):
         #print "\n-- Enigma Test 4 --"
         # Rotor 5 6 1 , Rings G G P, reflector B, plugs E-O F-P L-Y 
-        RF=RotorFactory()
+        RF=RotorFactory(Machines['M3'])
         RF.createRotor(Left,   "V G A")
         RF.createRotor(Middle, "VI G A")
         RF.createRotor(Right,  "I P A")
-        Enigma = EnigmaMachine ( RF, Reflectors['B'],
+        Enigma = EnigmaMachine (Machines['M3'],  RF, Reflectors(Machines['M3'],'UKW-B'),
                                  createPlugBoard(['EO','FP','LY']) )
         clue="WGLS CWYJ NLAY YMPW KSPP IKBK QDUA JVKO BLSS HIBO MHWO"
         #print clue

@@ -3,11 +3,11 @@
 
 ## bward_enigma.py
 
-Python Enigma implemeting 1 variant (the M3).
+Python Enigma implemeting 1 variant (M3).
 
 ## enigma-u_v20_en.html
 
-Universal Enigma by Daniel Palloks
+Universal Enigma by Daniel Palloks.
 
 This is a javascript implementation on a webpage.
 
