@@ -200,6 +200,7 @@ class TestEnigma2(unittest.TestCase):
         
 
     def test_Sondermaschine(self):
+        machine = Machine['S']
         pass
         
 
@@ -318,8 +319,26 @@ class TestEnigma2(unittest.TestCase):
         
 
     def test_KD(self):
+        machine = Machines['KD']
         pass
         
+
+    def testEnigmaMachine_for_Paul(self):
+        machine = Machines['M3']
+        RF=RotorFactory(machine)
+        RF.createRotor(Left,   "I A A")
+        RF.createRotor(Middle, "II A A")
+        RF.createRotor(Right,  "III A A")
+        Enigma = EnigmaMachine (machine, RF, ReflectorFixed(machine, 'UKW-B'), None)
+        
+        clue =   "AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA"
+        result = "BDZGO WCXLT KSBTM CDLPB MUQOF XYHCX" # website answer - this one passes
+        #result = "BDZGO WCXLT KSBTM CDLPB MFEBO UBDZG" # Pauls answer - this one fails
+        
+        test_result = spaceResult(Enigma.encrypt_message(clue, False),5)
+        #print test_result
+        self.assertEqual(test_result, result)
+
 
 if __name__ == '__main__':
 
