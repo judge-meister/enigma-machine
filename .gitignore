@@ -1,0 +1,7 @@
+*.pyc
+*.bak
+htmlcov
+__pycache__
+.coverage
+.DS_Store
+.figleaf
