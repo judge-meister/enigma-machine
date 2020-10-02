@@ -3,7 +3,7 @@
 
 ## bward_enigma.py
 
-Python Enigma implemeting 1 variant (M3).
+Python Enigma implemeting 1 variant (M3). https://gist.github.com/jvarho/d73ca813d7685668f949b92f3ecdaa60
 
 ## enigma-u_v20_en.html
 
