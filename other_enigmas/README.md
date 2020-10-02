@@ -9,7 +9,7 @@ Python Enigma implemeting 1 variant (M3).
 
 Universal Enigma by Daniel Palloks.
 
-This is a javascript implementation on a webpage.
+This is a javascript implementation on a webpage. http://people.physik.hu-berlin.de/~palloks/js/enigma/enigma-u_v20_en.html
 
 ## mat_enigma.py
 
