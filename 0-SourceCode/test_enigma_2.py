@@ -200,7 +200,7 @@ class TestEnigma2(unittest.TestCase):
         
 
     def test_Sondermaschine(self):
-        machine = Machine['S']
+        machine = Machines['S']
         pass
         
 
