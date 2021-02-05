@@ -41,6 +41,7 @@ from .Keyboard import Keyboard
 from .Rotors import Left, Middle, Right
 from .AlphaUtils import alpha
 from .EntryDisc import EntryDisc
+from .LampBoard import LampBoard
 
 class EnigmaMachine(object):
     """The Enigma Machine - it needs three rotors, a reflector and a plugboard
@@ -58,8 +59,10 @@ class EnigmaMachine(object):
         
         Pressing the keys on the keyboard actuates the rotation of the rotors.
         """
+        self.debug = False
         self.rotors = rotors
         self.keyboard = Keyboard(enigma, rotors, reflector)
+        self.lampboard = LampBoard()
         
         machine = []
         if plugboard:
@@ -68,16 +71,21 @@ class EnigmaMachine(object):
         for rotor in rotors:
             machine.append(rotor)
         machine.append(reflector)
-        machine.append(rotors)
+        machine.append(rotors) # rotors is a RotorFactory which has a call() method 
         for rotor in reversed(rotors):
             machine.append(rotor)
-        if plugboard:
-            machine.append(plugboard)
         ed = EntryDisc(enigma)
         ed.setReverse()
         machine.append(ed)
+        if plugboard:
+            machine.append(plugboard)
+        machine.append(self.lampboard)
         self.machine = machine
     
+    def enableDebug(self):
+        self.debug = True
+        self.lampboard.enableDebug(True)
+        
     def reset(self): 
         """reset the position of the rotors"""
         for rotor in self.rotors: 
