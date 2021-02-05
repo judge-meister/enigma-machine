@@ -12,10 +12,15 @@ list reflectors - standard are easy, I, M3
                 - M4 list combinations of static and greek (4 combos)
                 - Railway has rotatable reflector (no notches though)
 if plugboard supported offer to set up to 10, also check for duplicate letters
+
+----------------------------------------------------------------------------------------
+Information in this file is taken from https://cryptomuseum.com/crypto/enigma/wiring.htm
+----------------------------------------------------------------------------------------
 """
 
 Machines = {
 
+# -------------------------------------------------------------------------------------------------
 # Enigma I: German Army and Air Force (Wehrmacht, Luftwaffe) 
 
 # The Enigma I was the main Enigma machine used by the German Army. The Army and Navy machines were
@@ -39,11 +44,13 @@ Machines = {
 'UKW-B':	"YRUHQSLDPXNGOKMIEBFZCWVJAT",
 'UKW-C':	"FVPJIAOYEDRZXWGCTKUQSBNMHL",
 'Rotors':['I','II','III','IV','V'],
-#'RotorCount':3,
 'Reflectors':['UKW-A','UKW-B','UKW-C']
 },
 
 
+
+
+# -------------------------------------------------------------------------------------------------
 # Enigma M3: German Navy (Kriegsmarine) 
 
 # The Enigma M1, M2 and M3 machines were used by the German Navy (Kriegsmarine). They are basically
@@ -71,11 +78,13 @@ Machines = {
 'UKW-B':	"YRUHQSLDPXNGOKMIEBFZCWVJAT",
 'UKW-C':	"FVPJIAOYEDRZXWGCTKUQSBNMHL",
 'Rotors':['I','II','III','IV','V','VI','VII','VIII'],
-#'RotorCount':3,
 'Reflectors':['UKW-B','UKW-C']
 },
 
 
+
+
+# -------------------------------------------------------------------------------------------------
 # Enigma M4: U-Boot Enigma 
 
 # The Enigma M4 was a further development of the M3 and was used exclusively by the U-boat division 
@@ -107,16 +116,18 @@ Machines = {
 'UKW-B':	"ENKQAUYWJICOPBLMDXZVFTHRGS",
 'UKW-C':	"RDOBJNTKVEHMLFCWZAXGYIPSUQ",
 'Rotors':['I','II','III','IV','V','VI','VII','VIII','Beta','Gamma'],
-#'RotorCount':4,
 'Reflectors':['Beta','Gamma','UKW-B','UKW-C']
 },
 
 
+
+
+# -------------------------------------------------------------------------------------------------
 # Railway Enigma: Modified Enigma K 
 
 # During WWII, the Germans used a special Enigma machine for the German Railway (Reichsbahn). It
 # was basically a standard commercial Enigma K with rewired wheels and a rewired reflector (UKW).
-# Furthermore, the position of the notches of wheels I and III were swapped [7]. ➤ More
+# Furthermore, the position of the notches of wheels I and III were swapped [7]. 
 
 # Variation of the Enigma K
 # The K has a combined rotor/reflector. It can have a ring setting and an initial position but 
@@ -135,11 +146,13 @@ Machines = {
 'III':	{'wheel':"JVIUBHTCDYAKEQZPOSGXNRMWFL",	'notch':'G',	'turnover':'Y'},
 'UKW':	"QYHOGNECVPUZTFDJAXWMKISRBL", # settable reflector
 'Rotors':['I','II','III'],
-#'RotorCount':4,
 'Reflectors':['UKW']
 },
 
 
+
+
+# -------------------------------------------------------------------------------------------------
 # Enigma T: Japanese Enigma (Tirpitz) 
 
 # The Enigma T (Tirpitz) was a special version of the Enigma K that was made for the Japanese Army
@@ -168,11 +181,13 @@ Machines = {
 'VIII':	{'wheel':"YMTPNZHWKODAJXELUQVGCBISFR",	'notch':'FMQUY',	'turnover':'XEIMQ'},
 'UKW':	"GEKPBTAUMOCNILJDXZYFHWVQSR",
 'Rotors':['I','II','III','IV','V','VI','VII','VIII'],
-#'RotorCount':4,
 'Reflectors':['UKW']
 },
 
 
+
+
+# -------------------------------------------------------------------------------------------------
 # Norway Enigma: Postwar usage 
 #
 # In 1945, immediately after WWII, some captured Enigma-I machines were used by the the former 
@@ -201,12 +216,15 @@ Machines = {
 },
 
 
+
+
+# -------------------------------------------------------------------------------------------------
 # Sonder Enigma: Sondermaschine (special machine) 
 
 # In the late 1980s, a strange Enigma machine was dicovered in the house of a former intelligence
 # officer, who used to work for a special unit. Basically, this machine was a standard Enigma-I,
 # of which the wiring of the wheels and the UKW had been changed. For this reason, the machine and
-# the wheels were were marked with the letter 'S', which probably means Sondermaschine (special
+# the wheels were marked with the letter 'S', which probably means Sondermaschine (special
 # machine). The wooden case is marked A1807S, whilst the machine is labelled 17401S/jla/43. The
 # UKW is marked A19872S. The machine was re-discovered in 2017 by Gunter Hutter [9].
 
@@ -220,18 +238,19 @@ Machines = {
 'ETW':	"ABCDEFGHIJKLMNOPQRSTUVWXYZ",
 'I':	{'wheel':"VEOSIRZUJDQCKGWYPNXAFLTHMB",	'notch':'Y',	'turnover':'Q'},
 'II':	{'wheel':"UEMOATQLSHPKCYFWJZBGVXINDR",	'notch':'M',	'turnover':'E'},
-'III':	{'wheel':"TZHXMMBSIPNURJFDEQVCWGLAOY",	'notch':'D',	'turnover':'V'},
+'III':	{'wheel':"TZHXMBSIPNURJFDKEQVCWGLAOY",	'notch':'D',	'turnover':'V'},
 'UKW':	"CIAGSNDRBYTPZFULVHEKOQXWJM",
 'Rotors':['I','II','III'],
 'Reflectors':['UKW']
 },
 # At the end of WWII, the Enigma with serial number A17245 S was confiscated by a TICOM team and
 # transferred to the NSA. It has the same wiring of the UKW as the A17401 S mentioned above. As the
-# wheel #wiring of the former is known, we were able to complete the table above [10][11]. 
+# wheel wiring of the former is known, we were able to complete the table above [10][11]. 
 
 
 
 
+# -------------------------------------------------------------------------------------------------
 # Enigma G: Zählwerk Enigma A28 and G31 
 
 # The Zählwerk Enigma was the first machine with a cog-wheel driven stepping mechanism. It is the
@@ -258,10 +277,11 @@ Machines = {
 
 
 
+# -------------------------------------------------------------------------------------------------
 # Wiring of the G-312: G31 Abwehr Enigma 
 
 # The table below shows the wiring of the G-312. Although the machine is believed to have been
-# used by the German Abwehr, it is the only one every found with this wiring [3]. Different wirings
+# used by the German Abwehr, it is the only one ever found with this wiring [3]. Different wirings
 # were used for different sections of the Abwehr, and also for different radio nets. It is also
 # possible that some machines were rewired a number of times during their lifetime.
 
@@ -279,11 +299,13 @@ Machines = {
 'Reflectors':['uG']
 },
 
-#"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+#"AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAA"
 #"GJUIY CMDGU VTTFF QPZMX KVCTZ USOBZ LDZUM HQMJX WTZWM QNNUW IDYEQ PGVFZ ETOLB ZKTPL JPKRK FJGRT BNFBH BFYVK MVPVN HXUFJ OXSXE QTUPX LWKCO RIODF YXIVO ZUZCD SFEKB TXVGU EOGNV KZYTW SOYWK YPS"
 
 
 
+
+# -------------------------------------------------------------------------------------------------
 # Wiring of the G-260: G31 Abwehr Enigma 
 
 # In March 1945, just before the end of WWII, the Argentine police arrested the German spy Johann
@@ -308,24 +330,44 @@ Machines = {
 
 
 
+
+# -------------------------------------------------------------------------------------------------
+# Wiring of the G-111: G31 Hungarian Enigma 
+
+# The G-111 was a special version of the Enigma G (G31 model Ch.15b) [5] that was built for the
+# Hungarian Army. It was supplied with five cipher discs. The table below shows the wiring of the
+# wheels of the G-111, the entry disc (Eintrittswalze, ETW) and the reflector (Umkehrwalze, UKW).
+# Note that only wheels I, II and V were found with this machine.
+
 "G111":{
 'shortname':'G111',
 'Name':"G-111: Hungry/Munich",
 'basetype':'G',
 'Plugboard':False,
-'ETW':	"QWERTZUIOASDFGHJKPYXCVBNML",
-'I':	{'wheel':"WLRHBQUNDKJCZSEXOTMAGYFPVI",	'notch':'ACDEHIJKMNOQSTWXY',	'turnover':'SUVWZABCEFGIKLOPQ'},
-'II':	{'wheel':"TFJQAZWMHLCUIXRDYGOEVBNSKP",	'notch':'ABDGHIKLNOPSUVY',	'turnover':'STVYZACDFGHKMNQ'},
+'ETW':	"QWERTZUIOASDFGHJKPYXCVBNML", #  *1
+'I':	{'wheel':"WLRHBQUNDKJCZSEXOTMAGYFPVI",	'notch':'ACDEHIJKMNOQSTWXY',	'turnover':'SUVWZABCEFGIKLOPQ'}, # 17
+'II':	{'wheel':"TFJQAZWMHLCUIXRDYGOEVBNSKP",	'notch':'ABDGHIKLNOPSUVY',	'turnover':'STVYZACDFGHKMNQ'}, # 15
 #III	?	?	?	11
 #IV	?	?	?	?
-'V':	{'wheel':"QTPIXWVDFRMUSLJOHCANEZKYBG",	'notch':'AEHNPUY',	'turnover':'SWZFHMQ'},
-'UKW':	{'wheel':"IMETCGFRAYSQBZXWLHKDVUPOJN",	'notch':'',       	'turnover':''},
+'V':	{'wheel':"QTPIXWVDFRMUSLJOHCANEZKYBG",	'notch':'AEHNPUY',	'turnover':'SWZFHMQ'}, # 7
+'UKW':	{'wheel':"IMETCGFRAYSQBZXWLHKDVUPOJN",	'notch':'',       	'turnover':''}, #  *2
 'Rotors':['I','II','V'],
 'Reflectors':['UKW']
 },
+# As we can learn from the above table, the number of notches as well as the turnover positions of
+# wheels I and II are identical to those on the same wheels of other Zählwerk machines (17 and 15
+# notches respectively). This suggests that the notches of the G-machines were never changed.
+
+# This machine contains the standard wiring of the ETW for a commercial machine.
+# The UKW is also wired in the standard fashion for a commercial machine.
+# ---
+#  1. This machine contains the standard wiring of the ETW for a commercial machine.
+#  2. The UKW is also wired as in a commercial machine.
 
 
 
+
+# -------------------------------------------------------------------------------------------------
 # Enigma D: Commercial Enigma A26 
 
 # The Enigma D can be considered as the main commercial machine [6]. It was introduced in 1926
@@ -356,6 +398,8 @@ Machines = {
 
 
 
+
+# -------------------------------------------------------------------------------------------------
 # Enigma K: Commercial Enigma A27 
 
 # The wiring of the wheels of the standard Enigma K was identical to the wiring of the Enigma D.
@@ -383,6 +427,8 @@ Machines = {
 
 
 
+
+# -------------------------------------------------------------------------------------------------
 # Swiss-K: Swiss Enigma K variant 
 
 # This was the Swiss variant of the Enigma K. All Enigma K machines were delivered by the Germans
@@ -419,6 +465,8 @@ Machines = {
 
 
 
+
+# -------------------------------------------------------------------------------------------------
 # Enigma KD: Enigma K with UKW-D 
 
 # The Enigma KD was a standard commercial Enigma K machine with a rewirable reflector (UKW-D).
@@ -446,11 +494,12 @@ Machines = {
 'Reflectors':['UKW']
 },
 
-# *1 Note that due to the nature of the (rewirable) UKW it does not have a fixed wiring. The table
+# ---
+# 1. Note that due to the nature of the (rewirable) UKW it does not have a fixed wiring. The table
 #    above shows the wiring of the UKW when the machine was discovered at the FRU. The actual wiring
 #    will have been changed frequently when the machine was used in an operational context.
-
-# *2 Mil Amt changed the order of the wheels and the Ringstellung daily, whilst the Grundstellung (and
+#
+# 2. Mil Amt changed the order of the wheels and the Ringstellung daily, whilst the Grundstellung (and
 #    probably also the wiring of UKW-D) was changed every three weeks [7].
 
 }
@@ -473,31 +522,5 @@ if __name__ == '__main__': # pragma: no cover
         #print Machines[machine]
         #print Machines[machine]['Reflectors']
         #print Machines[machine][Machines[machine]['Reflectors'][0]]
-    
 
 
-
-# Wiring of the G-111: G31 Hungarian Enigma 
-
-# The G-111 was a special version of the Enigma G (G31 model Ch.15b) [5] that was built for the
-# Hungarian Army. It was supplied with five cipher discs. The table below shows the wiring of the
-# wheels of the G-111, the entry disc (Eintrittswalze, ETW) and the reflector (Umkehrwalze, UKW).
-# Note that only wheels I, II and V were found with this machine.
-
-#Wheel	ABCDEFGHIJKLMNOPQRSTUVWXYZ	Notch				Turnover			#
-#ETW		QWERTZUIOASDFGHJKPYXCVBNML	*1	 	 
-#I		WLRHBQUNDKJCZSEXOTMAGYFPVI	ACDEHIJKMNOQSTWXY	SUVWZABCEFGIKLOPQ	17
-#II		TFJQAZWMHLCUIXRDYGOEVBNSKP	ABDGHIKLNOPSUVY		STVYZACDFGHKMNQ		15
-#III		?	?	?	11
-#IV		?	?	?	?
-#V		QTPIXWVDFRMUSLJOHCANEZKYBG	AEHNPUY	SWZFHMQ	7
-#UKW		IMETCGFRAYSQBZXWLHKDVUPOJN	*2	 	 
-
-# As we can learn from the above table, the number of notches as well as the turnover positions of
-# wheels I and II are identical to those on the same wheels of other Zählwerk machines (17 and 15
-# notches respectively). This suggests that the notches of the G-machines were never changed.
-
-# This machine contains the standard wiring of the ETW for a commercial machine.
-# The UKW is also wired in the standard fashion for a commercial machine.
-
-    
