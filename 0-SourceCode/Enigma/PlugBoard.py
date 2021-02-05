@@ -13,11 +13,12 @@ from .Exceptions import InvalidPlugError, PlugBoardFullError
 
 class Plug(object):
     """Plug"""
-    def __init__(self, pair):
+    def __init__(self, pair, debug=False):
         self.pairStr = ''
         self.pairDict = {}
         #self.iter = None
         self._validate(pair)
+        self.debug = debug
 
     def _validate(self, pair):
         """validate the plug"""
@@ -58,7 +59,7 @@ class Plug(object):
     def __call__(self, ltr, debug=False):
         """encrypt the letter - use: 'plug(letter)'"""
         encltr = self.pairDict[ltr]
-        if debug: print("\nin letter %s - plug %s" % (ltr, encltr))
+        if self.debug: print("Plug In %s - Plug out %s" % (ltr, encltr))
         return encltr
 
 
@@ -69,6 +70,7 @@ class PlugBoard(object):
         #self.iter = None
         self.plugs = []
         self.maxPlugs = 10
+        self.debug = False
         
     def _partialMatch(self, plug):
         """is it a partial match"""
@@ -109,15 +111,20 @@ class PlugBoard(object):
             if ltr in plug:
                 used = True
                 return plug(ltr, debug) # .encrypt(ltr)
-        if debug and not plug_used: print("No Plug Used")
+        #if self.debug and not plug_used: print("No Plug Used")
+        if self.debug and not plug_used: print("PlugBoard return %s" % ltr)
         return ltr
+    
+    def setDebug(self, debug):
+        self.debug = debug
 
 
-def createPlugBoard(plugs):
+def createPlugBoard(plugs, debug=False):
     """create and populate a plugboard class"""
     PB = PlugBoard()
+    PB.setDebug(debug)
     for plug in plugs:
-        PB += Plug(plug)
+        PB += Plug(plug, debug)
     return PB
 
 
