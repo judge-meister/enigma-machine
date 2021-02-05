@@ -211,7 +211,7 @@ class TestKeyboard(unittest.TestCase):
         
 
     def create_G312_Machine(self):
-        """"""
+        """The G312 is an example of a machine with a cog based wheel turnover mechanism."""
         from .Rotors import RotorFactory
         from .MachineDetails import Machines
         #print "Create G312 Machine\n"
@@ -229,6 +229,7 @@ class TestKeyboard(unittest.TestCase):
 
 
     def test_G312_rotors(self):
+        """Using the G312 as an example, we can test a machine with a cog based wheel turnover mechanism."""
         from .AlphaUtils import alpha
         KB = self.create_G312_Machine()
         #RIGHT  -  A B C   E F G   I   K L     O P Q   S   U V W     Z
