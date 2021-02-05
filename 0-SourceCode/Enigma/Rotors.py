@@ -58,7 +58,8 @@ class RotorWheel(object):
         self.rotorCode = machine[rid]['wheel']  # rotor encryprion code
         #self.rotorNotch = machine[rid]['turnover'] # rotor notch locations
         self.rotorNotch = []
-        if verbose: print("%s Turnover[%s] %s" % (loc,rid, machine[rid]['turnover']))
+        self.verbose = verbose
+        if verbose: print("RotorWheel (init) %s Turnover[%s] %s" % (loc,rid, machine[rid]['turnover']))
         for notch in machine[rid]['turnover']:
             #print notch
             self.rotorNotch.append(alpha.letter(alpha.normal(alpha.pos(notch))))
@@ -88,10 +89,15 @@ class RotorWheel(object):
         """rotate the rotor 1 notch"""
         self.rotation = (self.rotation+1) % 26
         self.offset = self.ring_offset - self.rotation
+        if self.verbose:
+            if self.location == 1 or self.location == 2:
+                print("RotorWheel (rotate %s) rotation %d offset %d" % (self.rid, self.rotation, self.offset))
         
     def setForward(self, direction):
         """set the circuit direction"""
         self.forward = direction
+        #if self.verbose:
+        #    print("RotorWheel (setForward %s) forward %d" % (self.rid, direction))
         
     def inNotchPosition(self):
         """is the rotor in the notch position"""
@@ -112,10 +118,11 @@ class RotorWheel(object):
         depending on the value of self.forward the rotor encryption will 
         work in each directions
         """
+        if self.verbose: debug=True
         encltr = letter
         # first remove the ring setting offset to find the actual contact letter to encrypt
         encltr = alpha.letter(alpha.normal(alpha.pos(encltr) - self.offset)) 
-        if debug: print("in letter %s - remove offset(%d) %s " % (letter, self.offset, encltr), end=' ') 
+        if debug: print("RotorWheel %-5s %s in letter %s - remove offset(%3d) %s " % ("(%s)" % self.rid, 'F' if self.forward else 'B', letter, self.offset, encltr), end=' ') 
         # encrypt the contact letter - forward or backward as necessary
         if self.forward:
             encltr = self.rotorCode[alpha.pos(encltr)]
@@ -124,16 +131,20 @@ class RotorWheel(object):
         if debug: print("rotor enc %s " % encltr, end=' ') 
         # re-add the ringsetting offset before returning the answer
         encltr = alpha.letter(alpha.normal(alpha.pos(encltr) + self.offset))
-        if debug: print("adding offset(%d) %s" % (self.offset, encltr))
+        arrow = ''
+        if self.location == 0 and not self.forward:
+            arrow = " <<-"
+        if debug: print("adding offset(%3d) %s %s" % (self.offset, encltr, arrow))
         return encltr
         
 
 class RotorFactory(object):
     """RotorFactory"""
-    def __init__(self, machine):
+    def __init__(self, machine, debug=False):
         # Machine should be a dictionary
         if isinstance(machine, dict) == False:
             raise TypeError
+        self.debug = debug
         self.machine = machine
         self.RotorList = []
         self.RotorDict = {}
@@ -185,7 +196,7 @@ class RotorFactory(object):
             ring in ALPHA and \
             loc not in self.RotorPos \
             and rotor in ALPHA:
-            RW = RotorWheel(self.machine, rid, loc, ring, rotor)
+            RW = RotorWheel(self.machine, rid, loc, ring, rotor, self.debug)
             self += (loc, RW)
         else:
             raise InvalidRotorError("Invalid details")
