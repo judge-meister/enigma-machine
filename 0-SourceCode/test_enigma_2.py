@@ -21,7 +21,7 @@ def spaceResult(result, groupSize=5):
 
 class TestEnigma2(unittest.TestCase):
     """"""
-        
+
     def test_Enigma_Instruction_Manual(self):
         """
         Machine Settings for Enigma I/M3
@@ -32,6 +32,7 @@ class TestEnigma2(unittest.TestCase):
         Plug pairs:	AM FI NV PS TU WZ
         This message is taken from a German army instruction manual for the Enigma I (interoperable with the later navy machine, Enigma M3).
         """
+        debug = False
         machine = Machines['I']
         plugboard = createPlugBoard(['AM', 'FI', 'NV', 'PS', 'TU', 'WZ'])
         RF = RotorFactory(machine)
@@ -42,6 +43,11 @@ class TestEnigma2(unittest.TestCase):
 
         clue = "GCDSE AHUGW TQGRK VLFGX UCALX VYMIG MMNMF DXTGN VHVRM MEVOU YFZSL RHDRR XFJWC FHUHM UNZEF RDISI KBGPM YVXUZ"
         result = "FEIND LIQEI NFANT ERIEK OLONN EBEOB AQTET XANFA NGSUE DAUSG ANGBA ERWAL DEXEN DEDRE IKMOS TWAER TSNEU STADT"
+
+        if debug:
+            for x in Enigma.machine: print(x)
+            print("Result", result)
+
         test={'name'   : "[I] Enigma Instruction Manual, 1930",
               'enigma' : Enigma,
               'clue'   : spaceResult(clue.replace(' ',''),4),
@@ -51,8 +57,12 @@ class TestEnigma2(unittest.TestCase):
 
 
     def test_Enigma_Machine_WGLS(self):
-        #print "\n-- Enigma Test 4 --"
-        # Rotor 5 6 1 , Rings G G P, reflector B, plugs E-O F-P L-Y 
+        """
+        M3 Enigma Machine WGLS message
+
+        Rotor 5 6 1 , Rings G G P, reflector B, plugs E-O F-P L-Y 
+        """
+        debug = False
         machine = Machines['M3']
         plugboard = createPlugBoard(['EO','FP','LY'])
         RF=RotorFactory(machine)
@@ -60,21 +70,30 @@ class TestEnigma2(unittest.TestCase):
         RF.createRotor(Middle, "VI G A")
         RF.createRotor(Right,   "I P A")
         Enigma = EnigmaMachine (machine, RF, ReflectorFixed(machine, 'UKW-B'), plugboard )
+
         clue="WGLS CWYJ NLAY YMPW KSPP IKBK QDUA JVKO BLSS HIBO MHWO"
         result = "DERF UEHR ERIS TTOT XDER KAMP FGEH TWEI TERX DOEN ITZX"
-        
+
+        if debug:
+            for x in Enigma.machine: print(x)
+            print("Result", result)
+
         test={'name'   : "[M3] WGLS GGP Ring Setting",
               'enigma' : Enigma,
               'clue'   : clue,
               'result' : result}
         test_result = spaceResult(test['enigma'].encrypt_message(test['clue'], False),4)
         self.assertEqual(test_result, test['result'])
-        
-        
+
+
     @unittest.expectedFailure
-    def DISABLED_test_Enigma_Machine_WGLS_no_Ring_Setting(self):
-        #print "\n-- Enigma Test 4 --"
+    def test_Enigma_Machine_WGLS_no_Ring_Setting(self):
+        """
+        M3 Enigma - no ring settings - Fails
+
         # Rotor 5 6 1 , Rings G G P, reflector B, plugs E-O F-P L-Y 
+        """
+        debug = False
         machine = Machines['M3']
         plugboard = createPlugBoard(['EO','FP','LY'])
         RF=RotorFactory(machine)
@@ -84,7 +103,11 @@ class TestEnigma2(unittest.TestCase):
         Enigma = EnigmaMachine (machine, RF, ReflectorFixed(machine, 'UKW-B'), plugboard)
         clue = "WGLS CWYJ NLAY YMPW KSPP IKBK QDUA JVKO BLSS HIBO MHWO"
         result = "DERF UEHR ERIS TTOT XDER KAMP FGEH TWEI TERX DOEN ITZX"
-        
+
+        if debug:
+            for x in Enigma.machine: print(x)
+            print("Result", result)
+
         test={'name'   : "[M3] WGLS No Ring Setting [Without the ring settings this FAILS]",
               'enigma' : Enigma,
               'clue'   : clue,
@@ -107,9 +130,10 @@ class TestEnigma2(unittest.TestCase):
 
         NCZW VUSX PNYM INHZ XMQX SFWX WLKJ AHSH NMCO CCAK UQPM KCSM HKSE INJU SBLK IOSX CKUB HMLL XCSJ USRR DVKO HULX WCCB GVLI YXEO AHXR HKKF VDRE WEZL XOBA FGYU JQUK GRTV UKAM EURB VEKS UHHV OYHA BCJW MAKL FKLM YFVN RIZR VVRT KOFD ANJM OLBG FFLE OPRG TFLV RHOW OPBE KVWM UQFM PWPA RMFH AGKX IIBG
         """
+        debug = False
         machine = Machines['M4']
-        plugboard = createPlugBoard(['AT', 'BL', 'DF', 'GJ', 'HM', 'NW', 'OP', 'QY', 'RZ', 'VX'])
-        RF = RotorFactory(machine)
+        plugboard = createPlugBoard(['AT', 'BL', 'DF', 'GJ', 'HM', 'NW', 'OP', 'QY', 'RZ', 'VX'], debug)
+        RF = RotorFactory(machine, debug)
         RF.createRotor(Greek, "Beta A V")
         RF.createRotor(Left,    "II A J")
         RF.createRotor(Middle,  "IV A N")
@@ -118,15 +142,19 @@ class TestEnigma2(unittest.TestCase):
 
         clue = "NCZW VUSX PNYM INHZ XMQX SFWX WLKJ AHSH NMCO CCAK UQPM KCSM HKSE INJU SBLK IOSX CKUB HMLL XCSJ USRR DVKO HULX WCCB GVLI YXEO AHXR HKKF VDRE WEZL XOBA FGYU JQUK GRTV UKAM EURB VEKS UHHV OYHA BCJW MAKL FKLM YFVN RIZR VVRT KOFD ANJM OLBG FFLE OPRG TFLV RHOW OPBE KVWM UQFM PWPA RMFH AGKX IIBG"
         result = "VONV ONJL OOKS JHFF TTTE INSE INSD REIZ WOYY QNNS NEUN INHA LTXX BEIA NGRI FFUN TERW ASSE RGED RUEC KTYW ABOS XLET ZTER GEGN ERST ANDN ULAC HTDR EINU LUHR MARQ UANT ONJO TANE UNAC HTSE YHSD REIY ZWOZ WONU LGRA DYAC HTSM YSTO SSEN ACHX EKNS VIER MBFA ELLT YNNN NNNO OOVI ERYS ICHT EINS NULL"
-        
+
+        if debug:
+            for x in Enigma.machine: print(x)
+            print("Result", result)
+
         test={'name'   : "[M4] U264, 1942",
               'enigma' : Enigma,
               'clue'   : clue,
               'result' : spaceResult(result.replace(' ',''),4)}
-        
+
         test_result = spaceResult(test['enigma'].encrypt_message(test['clue'], False),4)
         self.assertEqual(test_result, test['result'])
-        
+
 
     def test_Turings_Treatise_1940(self):
         """
@@ -136,13 +164,14 @@ class TestEnigma2(unittest.TestCase):
         Message key: JEZA
 
         QSZVI DVMPN EXACM RWWXU IYOTY NGVVX DZ---
-        
+
         Machine Settings for Enigma K Railway
         Wheel order:		refl III I II
         Ring positions: 	 26  17 16 13
-        
+
         PROBLEM: The Railway has a rotating reflector
         """
+        debug = False
         machine = Machines['R']
         RF = RotorFactory(machine)
         RF.createRotor(Left,   "III Q E")
@@ -152,7 +181,11 @@ class TestEnigma2(unittest.TestCase):
 
         clue   = "QSZV IDVM PNEX ACMR WWXU IYOT YNGV VXDZ"
         result = "DEUT SQET RUPP ENSI NDJE TZTI NENG LAND"
-        
+
+        if debug:
+            for x in Enigma.machine: print(x)
+            print("Result", result)
+
         test={'name'   : "[K] Turing's Treatise, 1940",
               'enigma' : Enigma,
               'clue'   : clue,
@@ -162,6 +195,10 @@ class TestEnigma2(unittest.TestCase):
 
 
     def test_Japanese_Turpitz(self):
+        """
+        Japanese Turpitz
+        """
+        debug = False
         machine = Machines['T']
         RF = RotorFactory(machine)
         RF.createRotor(Left,  "III A A")
@@ -171,7 +208,11 @@ class TestEnigma2(unittest.TestCase):
 
         clue =   "AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA"
         result = "WLZNV CRJQP PGBDV NXGMG JGXCC IUWOR"
-        
+
+        if debug:
+            for x in Enigma.machine: print(x)
+            print("Result", result)
+
         test={'name'   : "[T] Turpitz",
               'enigma' : Enigma,
               'clue'   : clue,
@@ -181,6 +222,8 @@ class TestEnigma2(unittest.TestCase):
 
 
     def test_Norway(self):
+        """Norway"""
+        debug = False
         machine = Machines['N']
         RF = RotorFactory(machine)
         RF.createRotor(Left,  "III A A")
@@ -190,153 +233,238 @@ class TestEnigma2(unittest.TestCase):
 
         clue =   "AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA"
         result = "QWSCM IJHVV VLRHX IGXCW ODDWU WZSJQ"
-        
+
+        if debug:
+            for x in Enigma.machine: print(x)
+            print("Result", result)
+
         test={'name'   : "[N] Norenigma",
               'enigma' : Enigma,
               'clue'   : clue,
               'result' : result}
         test_result = spaceResult(test['enigma'].encrypt_message(test['clue'], False),5)
         self.assertEqual(test_result, test['result'])
-        
+
 
     def test_Sondermaschine(self):
-        machine = Machine['S']
-        pass
-        
+        """Sondermaschine - No Example encoding for this machine
+        this show an example of what it produces for an AAAAA... test message
+        """
+        debug = False
+        machine = Machines['S']
+        RF = RotorFactory(machine, debug)
+        RF.createRotor(Left,  "III A A")
+        RF.createRotor(Middle, "II A A")
+        RF.createRotor(Right,   "I A A")
+        Enigma = EnigmaMachine(machine, RF, ReflectorFixed(machine, 'UKW'), None )
+        #Enigma.enableDebug()
+
+        clue =   "AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA"
+        result = "ZGDYT SWLPZ GMJDU ZQQZD EWJZJ DRXPR"
+
+        if debug:
+            for x in Enigma.machine: print(x)
+            print("Result", result)
+
+        test_result = spaceResult(Enigma.encrypt_message(clue, False),5)
+        self.assertEqual(test_result, result)
+
 
     def test_Zahlwerk(self):
+        """Zahlwerk A865"""
+        debug = False
         machine = Machines['A865']
         RF = RotorFactory(machine)
         RF.createRotor(Left,  "III A A")
         RF.createRotor(Middle, "II A A")
         RF.createRotor(Right,   "I A A")
         Enigma = EnigmaMachine (machine, RF, ReflectorRotating(machine, "uG", 'A', 'A'), None)
-        
+
         clue =   "AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA"
         result = "EGWZQ HDDMG KUWQT XHUQV XRZTX KEHJE"
-        
-        test_result = spaceResult(Enigma.encrypt_message(clue, False),5)
-        #print test_result
-        self.assertEqual(test_result, result)
-        
 
-    #@unittest.expectedFailure
+        if debug:
+            for x in Enigma.machine: print(x)
+            print("Result", result)
+
+        test_result = spaceResult(Enigma.encrypt_message(clue, False),5)
+        self.assertEqual(test_result, result)
+
+
     def test_G312_Rotating_Reflector(self):
-        """"""
+        """G312 with Rotating Reflector"""
+        debug = False
         machine = Machines['G312']
         RF = RotorFactory(machine)
         RF.createRotor(Left,  "III A A")
         RF.createRotor(Middle, "II A A")
         RF.createRotor(Right,   "I A A")
         Enigma = EnigmaMachine (machine, RF, ReflectorRotating(machine, "uG", 'A', 'A'), None)
-        
+
         clue =   "AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA AAA"
         result = "GJUIY CMDGU VTTFF QPZMX KVCTZ USOBZ LDZUM HQMJX WTZWM QNNUW IDYEQ PGVFZ ETOLB ZKTPL JPKRK FJGRT BNFBH BFYVK MVPVN HXUFJ OXSXE QTUPX LWKCO RIODF YXIVO ZUZCD SFEKB TXVGU EOGNV KZYTW SOYWK YPS"
-        
+
+        if debug:
+            for x in Enigma.machine: print(x)
+            print("Result", result)
+
         test_result = spaceResult(Enigma.encrypt_message(clue, False),5)
-        #print test_result
         self.assertEqual(test_result, result)
 
 
     def test_G260(self):
+        """G260"""
+        debug = False
         machine = Machines['G260']
         RF = RotorFactory(machine)
         RF.createRotor(Left,  "III A A")
         RF.createRotor(Middle, "II A A")
         RF.createRotor(Right,   "I A A")
         Enigma = EnigmaMachine (machine, RF, ReflectorRotating(machine, "uG", 'A', 'A'), None)
-        
+
         clue =   "AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA"
         result = "CKNUL QYPIE MMXYG HTEGZ CDLVG TYXDB"
-        
+
+        if debug:
+            for x in Enigma.machine: print(x)
+            print("Result", result)
+
         test_result = spaceResult(Enigma.encrypt_message(clue, False),5)
-        #print test_result
         self.assertEqual(test_result, result)
-        
+
 
     def test_G111(self):
+        """G111"""
+        debug = False
         machine = Machines['G111']
         RF = RotorFactory(machine)
         RF.createRotor(Left,    "V A A")
         RF.createRotor(Middle, "II A A")
         RF.createRotor(Right,   "I A A")
         Enigma = EnigmaMachine (machine, RF, ReflectorRotating(machine, "UKW", 'A', 'A'), None)
-        
+
         clue =   "AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA"
         result = "QKUIB BGTIS OFZTS JGMXI EFGPI UBEUO"
-        
+
+        if debug:
+            for x in Enigma.machine: print(x)
+            print("Result", result)
+
         test_result = spaceResult(Enigma.encrypt_message(clue, False),5)
-        #print test_result
         self.assertEqual(test_result, result)
-        
+
 
     def test_Commercial_D(self):
+        """Commercial D"""
+        debug = False
         machine = Machines['D']
         RF = RotorFactory(machine)
         RF.createRotor(Left,  "III A A")
         RF.createRotor(Middle, "II A A")
         RF.createRotor(Right,   "I A A")
         Enigma = EnigmaMachine (machine, RF, ReflectorSettable(machine, "UKW", 'A', 'A'), None)
-        
+
         clue =   "AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA"
         result = "HLKUD THSYV ICWNZ WWDMW KGEOG ZYEQI"
-        
+
+        if debug:
+            for x in Enigma.machine: print(x)
+            print("Result", result)
+
         test_result = spaceResult(Enigma.encrypt_message(clue, False),5)
-        #print test_result
         self.assertEqual(test_result, result)
-        
+
 
     def test_Commercial_K(self):
+        """Commercial K"""
+        debug = False
         machine = Machines['K']
         RF = RotorFactory(machine)
         RF.createRotor(Left,  "III A A")
         RF.createRotor(Middle, "II A A")
         RF.createRotor(Right,   "I A A")
         Enigma = EnigmaMachine (machine, RF, ReflectorSettable(machine, "UKW", 'A', 'A'), None)
-        
+
         clue =   "AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA"
         result = "HLKUD THSYV ICWNZ WWDMW KGEOG ZYEQI"
-        
+
+        if debug:
+            for x in Enigma.machine: print(x)
+            print("Result", result)
+
         test_result = spaceResult(Enigma.encrypt_message(clue, False),5)
-        #print test_result
         self.assertEqual(test_result, result)
-        
+
 
     def test_Swiss_Air(self):
+        """Swiss Air"""
+        debug = False
         machine = Machines['KS']
         RF = RotorFactory(machine)
         RF.createRotor(Left,  "III A A")
         RF.createRotor(Middle, "II A A")
         RF.createRotor(Right,   "I A A")
         Enigma = EnigmaMachine (machine, RF, ReflectorSettable(machine, "UKW", 'A', 'A'), None)
-        
+
         clue =   "AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA"
         result = "INRKJ YXUKU TPIIL MLQRG DOFUM BXRTZ"
-        
+
+        if debug:
+            for x in Enigma.machine: print(x)
+            print("Result", result)
+
         test_result = spaceResult(Enigma.encrypt_message(clue, False),5)
-        #print test_result
         self.assertEqual(test_result, result)
-        
+
 
     def test_KD(self):
+        """KD Enigma - No Example encoding for this machine
+        this show an example of what it produces for an AAAAA... test message
+        """
+        debug = False
         machine = Machines['KD']
-        pass
-        
+        RF = RotorFactory(machine, debug)
+        RF.createRotor(Left,  "III A A")
+        RF.createRotor(Middle, "II A A")
+        RF.createRotor(Right,   "I A A")
+        Enigma = EnigmaMachine(machine, RF, ReflectorFixed(machine, 'UKW'), None )
+        #Enigma.enableDebug()
 
+        clue =   "AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA"
+        result = "OSHDP YSPOO OGZWN LEXTS XEMHB HWECL"
+
+        if debug:
+            for x in Enigma.machine: print(x)
+            print("Result", result)
+
+        test_result = spaceResult(Enigma.encrypt_message(clue, False),5)
+        self.assertEqual(test_result, result)
+
+
+    @unittest.expectedFailure
     def testEnigmaMachine_for_Paul(self):
+        """Paul's Enigma machine results"""
+        debug = False
         machine = Machines['M3']
-        RF=RotorFactory(machine)
+        RF=RotorFactory(machine, debug)
         RF.createRotor(Left,   "I A A")
         RF.createRotor(Middle, "II A A")
         RF.createRotor(Right,  "III A A")
-        Enigma = EnigmaMachine (machine, RF, ReflectorFixed(machine, 'UKW-B'), None)
-        
+        Enigma = EnigmaMachine (machine, RF, ReflectorFixed(machine, 'UKW-B'), createPlugBoard([], debug))
+
         clue =   "AAAAA AAAAA AAAAA AAAAA AAAAA AAAAA"
+
         result = "BDZGO WCXLT KSBTM CDLPB MUQOF XYHCX" # website answer - this one passes
-        #result = "BDZGO WCXLT KSBTM CDLPB MFEBO UBDZG" # Pauls answer - this one fails
-        
         test_result = spaceResult(Enigma.encrypt_message(clue, False),5)
-        #print test_result
+        self.assertEqual(test_result, result)
+
+        result = "BDZGO WCXLT KSBTM CDLPB MFEBO UBDZG" # Pauls answer - this one fails
+
+        if debug:
+            for x in Enigma.machine: print(x)
+            print("Result", result)
+
+        test_result = spaceResult(Enigma.encrypt_message(clue, False),5)
         self.assertEqual(test_result, result)
 
 
@@ -349,8 +477,5 @@ if __name__ == '__main__':
 
     print("\nUnit Tests for Enigma Machine\n")
     unittest.main()
-    #suite = unittest.TestLoader().loadTestsFromTestCase(TestEnigma2)
-    #unittest.TextTestRunner(verbosity=2).run(suite)
-    #sys.exit()
 
 
