@@ -6,7 +6,7 @@ Simulates the WWII enigma machines. So far 15 separate variations.
 Unit tests cover all variants so far programmed in the code.  The CLI and GUI still only really cover the M3.
 
 
-## Variant Details
+## Enigma Variant Details
 
 |Code|Name|Base Type|Decription|
 |----|----|---------|----------|
@@ -25,3 +25,7 @@ Unit tests cover all variants so far programmed in the code.  The CLI and GUI st
 | K  |Commercial A27| K	|3 rotors with 1 to 9 notches, no plugboard, settable reflectors but not rotating|
 | KS |Swiss AF| K	|3 rotors with 1 to 9 notches, no plugboard, settable reflectors but not rotating|
 | KD |K with UKW-D	| K	|3 rotors with 1 to 9 notches, no plugboard, settable reflectors but not rotating|
+
+## Notes
+
+Requires Python 3.6 as a minimum to run the unit tests, but preferable Python 3.8. The GUI requires wxpython 4.0 or greater.
